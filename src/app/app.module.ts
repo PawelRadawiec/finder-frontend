@@ -15,6 +15,8 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { ArticleState } from './store/article.state';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,13 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     ArticleListComponent
   ],
   imports: [
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([
+      ArticleState
+    ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
