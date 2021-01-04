@@ -1,3 +1,9 @@
-<app-header [deviceXs]="deviceXs"></app-header>
-
-<router-outlet></router-outlet>
+<div fxLayout="column">
+    <div  class="header">
+        <app-header [deviceXs]="deviceXs"></app-header>
+    </div>
+   
+    <div fxFlex="1" fxLayout="column" fxLayoutAlign="space-around center">
+        <router-outlet></router-outlet>
+    </div>
+</div>
