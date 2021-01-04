@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ArticleListComponent } from './components/article-list/article-list.com
     ArticleListComponent
   ],
   imports: [
+    NgxsModule.forRoot([]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
