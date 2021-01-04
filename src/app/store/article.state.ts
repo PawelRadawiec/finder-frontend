@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext, Store } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { Article } from "../models/article.model";
 import { ArticleService } from "../service/article.service";
 import { ArticleActions } from "./article.actions";
@@ -22,6 +22,11 @@ export class ArticleState {
         private store: Store,
         private articleService: ArticleService
     ) {
+    }
+
+    @Selector()
+    static articles(state: ArticleStateModel) {
+        return state.articles;
     }
 
     @Action(ArticleActions.SearchArticlesRequest)
