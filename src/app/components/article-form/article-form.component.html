@@ -1,0 +1,31 @@
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Article url</mat-label>
+                <input matInput placeholder="Article" formControlName="url">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Picture url</mat-label>
+                <input matInput placeholder="Picture url" formControlName="pictureUrl">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <button mat-raised-button type="submit" color="primary">Save</button>
+    </div>
+</form>

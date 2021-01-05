@@ -4,7 +4,7 @@
         <mat-card-title>{{article?.title}}</mat-card-title>
         <mat-card-subtitle>{{article?.url}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://v.wpimg.pl/NDA4NDIuYSUgVjh3Zg5sMGMObC0gV2JmNBZ0ZmZDdnQ5Gz0iPgVgMzFXKipnBSJrMlMRNzkQLS0gWDohKAYrNh5cYXEoTX4lIg0qdS8QKnFza313cEF-fHUGYC45Emw5" alt="Photo of a Shiba Inu">
+    <img mat-card-image [src]="article?.pictureUrl">
     <mat-card-content>
         <p>{{article?.description}}</p>
     </mat-card-content>

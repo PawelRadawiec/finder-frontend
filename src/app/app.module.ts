@@ -18,6 +18,9 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { ArticleState } from './store/article.state';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HeaderComponent,
     ArticleComponent,
     ArticleListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ArticleFormComponent
   ],
   imports: [
     NgxsModule.forRoot([
@@ -33,6 +37,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -41,7 +46,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
