@@ -3,15 +3,7 @@ export class Article {
     url: string;
     title: string;
     author: string;
+    pictureUrl: string;
     description: string;
     tags: string[];
 }
-
-
-
-// private String id;
-// private String url;
-// private String title;
-// private String author;
-// private String description;
-// private List<String> tags;

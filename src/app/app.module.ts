@@ -17,13 +17,15 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { ArticleState } from './store/article.state';
 import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ArticleComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     NgxsModule.forRoot([
