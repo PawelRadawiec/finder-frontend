@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-article-form',
@@ -17,16 +17,16 @@ export class ArticleFormComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    console.log('values: ', this.articleForm.value);
   }
 
   setArticleForm() {
     this.articleForm = this.formBuilder.group({
-        url: [''],
-        title: [''],
-        author: [''],
-        pictureUrl: [''],
-        description: ['']
+      url: [''],
+      title: [''],
+      author: [''],
+      pictureUrl: [''],
+      description: ['']
     })
   }
 

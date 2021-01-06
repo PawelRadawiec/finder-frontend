@@ -21,6 +21,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ArticleFormComponent } from './components/article-form/article-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { TagChipsComponent } from './components/tag-chips/tag-chips.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
     ArticleComponent,
     ArticleListComponent,
     PageNotFoundComponent,
-    ArticleFormComponent
+    ArticleFormComponent,
+    TagChipsComponent
   ],
   imports: [
     NgxsModule.forRoot([
@@ -47,7 +52,9 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
