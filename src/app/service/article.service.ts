@@ -15,4 +15,8 @@ export class ArticleService {
     return this.http.get<Article[]>(`${this.baseUrl}/search`);
   }
 
+  create(article: Article) {
+    return this.http.post<Article>(`${this.baseUrl}/create`, article);
+  }
+
 }

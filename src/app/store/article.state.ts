@@ -6,6 +6,7 @@ import { ArticleActions } from "./article.actions";
 import { mergeMap } from 'rxjs/operators';
 
 export interface ArticleStateModel {
+    article: Article;
     articles: Article[];
 }
 
@@ -40,6 +41,20 @@ export class ArticleState {
     searchResponse(state: StateContext<ArticleStateModel>, action: ArticleActions.SearchArticlesResponse) {
         state.patchState({
             articles: action.response
+        });
+    }
+
+    @Action(ArticleActions.ArticleFormRequest)
+    createRequest(state: StateContext<ArticleStateModel>, action: ArticleActions.ArticleFormRequest) {
+        return this.articleService.create(action.article).pipe(
+            mergeMap(article => this.store.dispatch(new ArticleActions.SetArticle(article)))
+        );
+    }
+
+    @Action(ArticleActions.SetArticle)
+    setArticle(state: StateContext<ArticleStateModel>, action: ArticleActions.SetArticle) {
+        state.patchState({
+            article: action.article
         });
     }
 
