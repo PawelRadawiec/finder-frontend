@@ -24,6 +24,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { TagChipsComponent } from './components/tag-chips/tag-chips.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { errorInterceptorProviders } from './intercepter/errors.interceptor';
+import { ErrorState } from './store/error/error.state';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   ],
   imports: [
     NgxsModule.forRoot([
-      ArticleState
+      ArticleState,
+      ErrorState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
@@ -54,9 +58,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatCardModule,
     MatInputModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    TextFieldModule
+
   ],
-  providers: [],
+  providers: [errorInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
