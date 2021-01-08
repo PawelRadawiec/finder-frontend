@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { ExceptionResponse } from "src/app/models/exception-response.model";
 import { ErrorActions } from "./error.actions";
 
@@ -19,6 +19,11 @@ export interface ErrorStateModel {
 export class ErrorState {
 
     constructor() { }
+
+    @Selector()
+    static errors(state: ErrorStateModel) {
+        return state.errors;
+    }
 
     @Action(ErrorActions.SetErrors)
     setErrors(state: StateContext<ErrorStateModel>, action: ErrorActions.SetErrors) {

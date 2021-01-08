@@ -2,14 +2,18 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
+import { Store } from '@ngxs/store';
+import { ErrorState } from 'src/app/store/error/error.state';
 
 @Component({
   selector: 'app-tag-chips',
   templateUrl: './tag-chips.component.html',
-  styleUrls: ['./tag-chips.component.css']
+  styleUrls: ['./tag-chips.component.css'],
+  providers: [ErrorStateMatcherHelperService]
 })
 export class TagChipsComponent implements OnInit {
   @Input() form: FormGroup;
@@ -18,18 +22,27 @@ export class TagChipsComponent implements OnInit {
   filteredTags: Observable<string[]>;
   tags: string[] = [];
   allTags: string[] = ['Car', 'landspace', 'funny'];
+  private subscription: Subscription;
 
+  @ViewChild('chipList') chipList;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private store: Store,
+    private formBuilder: FormBuilder,
+    public errorHelper: ErrorStateMatcherHelperService
+  ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filter(fruit) : this.allTags.slice()));
   }
 
   ngOnInit() {
+    this.subscription = this.store.select(ErrorState.errors).subscribe(
+      () => this.hasError()
+    )
     this.form.addControl('tags', this.formBuilder.array([
       this.tagCtrl
     ]));
@@ -66,6 +79,13 @@ export class TagChipsComponent implements OnInit {
       return [];
     }
     return this.allTags.filter(fruit => fruit.toLowerCase().indexOf(value.toLowerCase()) === 0);
+  }
+
+  hasError() {
+    if (this.chipList) {
+      this.chipList.errorState = this.errorHelper?.getMatcher('tags')?.hasError;
+    }
+
   }
 
 }

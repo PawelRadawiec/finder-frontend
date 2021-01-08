@@ -19,6 +19,9 @@
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
+    <mat-error>
+      {{errorHelper?.getMatcher('tags')?.message}}
+    </mat-error>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
         {{tag}}
