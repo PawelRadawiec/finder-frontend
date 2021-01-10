@@ -24,6 +24,7 @@
     "@angular/router": "~10.1.6",
     "@ngxs/devtools-plugin": "^3.7.1",
     "@ngxs/logger-plugin": "^3.7.1",
+    "@ngxs/router-plugin": "^3.7.1",
     "@ngxs/store": "^3.7.1",
     "rxjs": "~6.6.0",
     "rxjs-operators": "^1.1.3",

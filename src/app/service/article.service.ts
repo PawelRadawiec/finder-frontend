@@ -19,4 +19,8 @@ export class ArticleService {
     return this.http.post<Article>(`${this.baseUrl}/create`, article);
   }
 
+  getById(id: string) {
+    return this.http.get<Article>(`${this.baseUrl}/${id}`);
+  }
+
 }

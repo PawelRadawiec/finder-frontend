@@ -6,6 +6,7 @@ export class Article {
     pictureUrl: string;
     description: string;
     tags: string[];
+    comments: Comment[];
 
     constructor(props = {}) {
         Object.assign(this, props);

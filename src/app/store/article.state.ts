@@ -4,6 +4,7 @@ import { Article } from "../models/article.model";
 import { ArticleService } from "../service/article.service";
 import { ArticleActions } from "./article.actions";
 import { mergeMap } from 'rxjs/operators';
+import { Navigate } from "@ngxs/router-plugin";
 
 export interface ArticleStateModel {
     article: Article;
@@ -23,6 +24,11 @@ export class ArticleState {
         private store: Store,
         private articleService: ArticleService
     ) {
+    }
+
+    @Selector()
+    static article(state: ArticleStateModel) {
+        return state.article;
     }
 
     @Selector()
@@ -49,6 +55,21 @@ export class ArticleState {
         return this.articleService.create(action.article).pipe(
             mergeMap(article => this.store.dispatch(new ArticleActions.SetArticle(article)))
         );
+    }
+
+    @Action(ArticleActions.GetByIdRequest)
+    getByIdRequest(state: StateContext<ArticleStateModel>, action: ArticleActions.GetByIdRequest) {
+        return this.articleService.getById(action.id).pipe(
+            mergeMap(article => this.store.dispatch(new ArticleActions.GetByIdResponse(article)))
+        );
+    }
+
+    @Action(ArticleActions.GetByIdResponse)
+    getByIdResponse(state: StateContext<ArticleStateModel>, action: ArticleActions.GetByIdResponse) {
+        const article = action.response;
+        state.patchState({
+            article
+        });
     }
 
     @Action(ArticleActions.SetArticle)

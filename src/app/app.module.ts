@@ -27,6 +27,30 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { errorInterceptorProviders } from './intercepter/errors.interceptor';
 import { ErrorState } from './store/error/error.state';
+import { ArticleDetailsComponent } from './components/article-details/article-details.component';
+import { MatTableModule } from '@angular/material/table';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+
+const materialModules = [
+  MatToolbarModule,
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatChipsModule,
+  MatTableModule,
+  MatAutocompleteModule
+];
+
+const ngxsModules = [
+  NgxsModule.forRoot([
+    ArticleState,
+    ErrorState
+  ]),
+  NgxsRouterPluginModule.forRoot(),
+  NgxsReduxDevtoolsPluginModule.forRoot(),
+  NgxsLoggerPluginModule.forRoot(),
+];
 
 
 @NgModule({
@@ -37,30 +61,19 @@ import { ErrorState } from './store/error/error.state';
     ArticleListComponent,
     PageNotFoundComponent,
     ArticleFormComponent,
-    TagChipsComponent
+    TagChipsComponent,
+    ArticleDetailsComponent
   ],
   imports: [
-    NgxsModule.forRoot([
-      ArticleState,
-      ErrorState
-    ]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
+    ngxsModules,
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FlexLayoutModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-    MatChipsModule,
-    MatAutocompleteModule,
-    TextFieldModule
-
+    FlexLayoutModule,
+    TextFieldModule,
+    materialModules
   ],
   providers: [errorInterceptorProviders],
   bootstrap: [AppComponent]
