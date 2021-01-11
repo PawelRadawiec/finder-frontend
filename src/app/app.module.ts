@@ -30,6 +30,7 @@ import { ErrorState } from './store/error/error.state';
 import { ArticleDetailsComponent } from './components/article-details/article-details.component';
 import { MatTableModule } from '@angular/material/table';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -62,7 +63,8 @@ const ngxsModules = [
     PageNotFoundComponent,
     ArticleFormComponent,
     TagChipsComponent,
-    ArticleDetailsComponent
+    ArticleDetailsComponent,
+    CommentFormComponent
   ],
   imports: [
     ngxsModules,

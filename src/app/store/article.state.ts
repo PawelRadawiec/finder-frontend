@@ -72,6 +72,13 @@ export class ArticleState {
         });
     }
 
+    @Action(ArticleActions.AddComment)
+    addComment(state: StateContext<ArticleStateModel>, action: ArticleActions.AddComment) {
+        return this.articleService.addComnnet(action.articleId, action.comment).pipe(
+            mergeMap(article => this.store.dispatch(new ArticleActions.SetArticle(article)))
+        );
+    }
+
     @Action(ArticleActions.SetArticle)
     setArticle(state: StateContext<ArticleStateModel>, action: ArticleActions.SetArticle) {
         state.patchState({

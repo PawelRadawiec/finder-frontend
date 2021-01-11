@@ -1,4 +1,5 @@
 import { Article } from "../models/article.model";
+import { Comment } from "../models/comment.model";
 
 export namespace ArticleActions {
 
@@ -41,6 +42,15 @@ export namespace ArticleActions {
         static readonly type = '[Article] SetArticle';
 
         constructor(public article: Article) { }
+    }
+
+    export class AddComment {
+        static readonly type = '[Article] AddComment';
+
+        constructor(
+            public articleId: string,
+            public comment: Comment
+        ) { }
     }
 
 }

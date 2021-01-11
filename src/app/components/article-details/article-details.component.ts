@@ -19,7 +19,7 @@ import { ArticleState } from 'src/app/store/article.state';
   ],
 })
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
-  columnsToDisplay = ['author', 'shortComment'];
+  columnsToDisplay = ['author', 'shortText'];
   expandedElement: Comment | null;
   article: Article;
 
