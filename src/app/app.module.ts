@@ -31,15 +31,17 @@ import { ArticleDetailsComponent } from './components/article-details/article-de
 import { MatTableModule } from '@angular/material/table';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const materialModules = [
-  MatToolbarModule,
-  MatButtonModule,
   MatIconModule,
   MatCardModule,
   MatInputModule,
   MatChipsModule,
   MatTableModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatDividerModule,
   MatAutocompleteModule
 ];
 

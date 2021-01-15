@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article.model';
 import { Store } from '@ngxs/store';
 import { ArticleState } from 'src/app/store/article.state';
+import { Comment } from 'src/app/models/comment.model';
+import * as _ from 'lodash';
+
 
 
 @Component({
@@ -19,7 +22,7 @@ import { ArticleState } from 'src/app/store/article.state';
   ],
 })
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
-  columnsToDisplay = ['author', 'shortText'];
+  columnsToDisplay = ['author', 'likes', 'dislikes', 'shortText'];
   expandedElement: Comment | null;
   article: Article;
 
@@ -29,12 +32,20 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.select(ArticleState.article).subscribe(
-      article => this.article = article
+      article => this.handleArticleSubscribe(article)
     )
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  handleArticleSubscribe(article: Article) {
+    this.article = _.cloneDeep(article);
+    this.article.comments.forEach(comment => {
+      comment.likes = comment?.ratings?.filter(rating => rating.value)?.length;
+      comment.dislikes = comment?.ratings?.filter(rating => !rating.value)?.length;
+    })
   }
 
 }

@@ -1,6 +1,6 @@
 <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <div fxLayout="column" fxLayoutAlign="center center">
-        <div style="width: 100%;">
+        <div>
             <mat-form-field>
                 <mat-label>Comment</mat-label>
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="comment"
