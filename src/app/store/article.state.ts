@@ -86,4 +86,11 @@ export class ArticleState {
         });
     }
 
+    @Action(ArticleActions.EvaluateCommentRequest)
+    evaluateComment(state: StateContext<ArticleStateModel>, action: ArticleActions.EvaluateCommentRequest) {
+        return this.articleService.evaluate(action.articleId, action.commentId, action.ratting).pipe(
+            mergeMap(response => this.store.dispatch(new ArticleActions.SetArticle(response)))
+        );
+    }
+
 }

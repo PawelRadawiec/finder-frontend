@@ -10,6 +10,8 @@ export class ArticleService {
 
   private baseUrl = 'http://localhost:8080/article';
   private commentUrl = 'http://localhost:8080/comment';
+  private rattingUrl = 'http://localhost:8080/rating';
+
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +29,10 @@ export class ArticleService {
 
   addComnnet(articleId: string, comment: Comment) {
     return this.http.post<Article>(`${this.commentUrl}/${articleId}`, comment);
+  }
+
+  evaluate(articleId: string, commentId: number, ratting: any) {
+    return this.http.put<Article>(`${this.rattingUrl}/evaluate/${articleId}/${commentId}`, ratting);
   }
 
 }

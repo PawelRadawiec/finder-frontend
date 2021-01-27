@@ -53,4 +53,18 @@ export namespace ArticleActions {
         ) { }
     }
 
+    export class EvaluateCommentRequest {
+        static readonly type = '[Article] EvaluateCommentRequest';
+        constructor(
+            public articleId: string,
+            public commentId: number,
+            public ratting: any
+        ) { }
+    }
+
+    export class EvaluateCommentResponse {
+        static readonly type = '[Article]EvaluateCommentResponse';
+        constructor(public response: Article) { }
+    }
+
 }

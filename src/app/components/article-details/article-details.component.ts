@@ -6,7 +6,7 @@ import { Store } from '@ngxs/store';
 import { ArticleState } from 'src/app/store/article.state';
 import { Comment } from 'src/app/models/comment.model';
 import * as _ from 'lodash';
-
+import { ArticleActions } from 'src/app/store/article.actions';
 
 
 @Component({
@@ -27,10 +27,13 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
   article: Article;
 
   private subscription: Subscription;
+  private ratingValues: Map<string, boolean> = new Map<string, boolean>();
 
   constructor(private store: Store) { }
 
   ngOnInit() {
+    this.ratingValues.set('LIKE', true);
+    this.ratingValues.set('DISLIKE', false);
     this.subscription = this.store.select(ArticleState.article).subscribe(
       article => this.handleArticleSubscribe(article)
     )
@@ -40,12 +43,20 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  handleArticleSubscribe(article: Article) {
+  private handleArticleSubscribe(article: Article) {
     this.article = _.cloneDeep(article);
     this.article.comments.forEach(comment => {
       comment.likes = comment?.ratings?.filter(rating => rating.value)?.length;
       comment.dislikes = comment?.ratings?.filter(rating => !rating.value)?.length;
     })
+  }
+
+  evaluate(type: string, commentId: number) {
+    const ratting = {
+      value: this.ratingValues.get(type),
+      author: 'pawelr123'
+    };
+    this.store.dispatch(new ArticleActions.EvaluateCommentRequest(this.article.id, commentId, ratting))
   }
 
 }

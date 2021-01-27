@@ -18,8 +18,8 @@
                             {{element.text}}
                         </div>
                         <div>
-                            <button mat-stroked-button color="primary">Like</button>
-                            <button mat-stroked-button color="warn">Dislike</button>
+                            <button mat-stroked-button color="primary" (click)="evaluate('LIKE', element.id)">Like</button>
+                            <button mat-stroked-button color="warn" (click)="evaluate('DISLIKE', element.id)">Dislike</button>
                         </div>
                     </div>
                 </div>
