@@ -10,7 +10,7 @@ import { ArticlesResolver } from './resolvers/articles.resolver';
 const routes: Routes = [
   {
     path: 'articles',
-    component: ArticleListComponent,
+    component: ArticleListComponent, 
     resolve: [ArticlesResolver]
   },
   {

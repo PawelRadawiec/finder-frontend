@@ -6,8 +6,8 @@
                 <span class="logo">Finder</span>
             </button>
             <div *ngIf="!deviceXs">
-                <button mat-button>Home</button>
-                <button mat-button>Contact us</button>
+                <button mat-button routerLink="/articles" routerLinkActive="active">Articles </button>
+                <button mat-button routerLink="/article-form" routerLinkActive="active">Share article</button>
                 <button mat-button>About us</button>
             </div>
         </div>
