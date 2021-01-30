@@ -33,6 +33,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
+import { SettingsState } from './store/settings/settings.state';
 
 const materialModules = [
   MatIconModule,
@@ -50,8 +51,9 @@ const materialModules = [
 
 const ngxsModules = [
   NgxsModule.forRoot([
+    ErrorState,
     ArticleState,
-    ErrorState
+    SettingsState
   ]),
   NgxsRouterPluginModule.forRoot(),
   NgxsReduxDevtoolsPluginModule.forRoot(),
