@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article.model';
-import { Store } from '@ngxs/store';
+import { Select, Selector, Store } from '@ngxs/store';
 import { ArticleState } from 'src/app/store/article.state';
 import { Comment } from 'src/app/models/comment.model';
 import * as _ from 'lodash';
 import { ArticleActions } from 'src/app/store/article.actions';
+import { SettingsState } from 'src/app/store/settings/settings.state';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { ArticleActions } from 'src/app/store/article.actions';
   ],
 })
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
+  @Select(SettingsState.xsDevice) xsDevice$: Observable<boolean>;
   columnsData = [
     {columnName: 'author', fieldName: 'author'}, 
     {columnName: 'comment', fieldName: 'shortText'}, 

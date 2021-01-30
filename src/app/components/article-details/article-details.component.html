@@ -13,7 +13,8 @@
                     <button mat-button>{{element.author}}</button>
                 </ng-container>
                 <ng-container *ngIf="column.columnName === 'comment'">
-                    <p>{{element.shortText}}</p>
+                    <p *ngIf="xsDevice$ | async">{{element.shortText | shortText: 15}}</p>
+                    <p *ngIf="!(xsDevice$ | async)">{{element.shortText }}</p>
                 </ng-container>
                 <ng-container *ngIf="column.columnName === 'likes'">
                     <p>

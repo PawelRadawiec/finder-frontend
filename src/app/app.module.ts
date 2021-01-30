@@ -34,6 +34,7 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SettingsState } from './store/settings/settings.state';
+import { ShortTextPipe } from './pipes/short-text.pipe';
 
 const materialModules = [
   MatIconModule,
@@ -71,7 +72,9 @@ const ngxsModules = [
     ArticleFormComponent,
     TagChipsComponent,
     ArticleDetailsComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    // pipes
+    ShortTextPipe
   ],
   imports: [
     ngxsModules,
