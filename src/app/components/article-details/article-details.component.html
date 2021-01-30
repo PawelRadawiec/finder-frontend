@@ -4,29 +4,51 @@
     </div>
     <app-comment-form></app-comment-form>
     <table mat-table [dataSource]="article?.comments" multiTemplateDataRows class="mat-elevation-z8">
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-            <th mat-header-cell *matHeaderCellDef>{{column}}</th>
-            <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+        <ng-container matColumnDef="{{column.columnName}}" *ngFor="let column of columnsData">
+            <th mat-header-cell *matHeaderCellDef>
+                {{column.columnName}}
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <ng-container *ngIf="column.columnName === 'author'">
+                    <button mat-button>{{element.author}}</button>
+                </ng-container>
+                <ng-container *ngIf="column.columnName === 'comment'">
+                    <p>{{element.shortText}}</p>
+                </ng-container>
+                <ng-container *ngIf="column.columnName === 'likes'">
+                    <p>
+                        <mat-icon [matBadge]="element.likes" matBadgeSize="small" matBadgeColor="primary">thumb_up_off
+                        </mat-icon>
+                    </p>
+                </ng-container>
+                <ng-container *ngIf="column.columnName === 'dislikes'">
+                    <p>
+                        <mat-icon [matBadge]="element.dislikes" matBadgeSize="small" matBadgeColor="warn">thumb_down_off
+                        </mat-icon>
+                    </p>
+                </ng-container>
+            </td>
         </ng-container>
         <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsData.length">
                 <div class="example-element-detail"
                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                     <div class="example-element-description">
-                        <mat-divider></mat-divider>
                         <div>
                             {{element.text}}
                         </div>
                         <div>
-                            <button mat-stroked-button color="primary" (click)="evaluate('LIKE', element.id)">Like</button>
-                            <button mat-stroked-button color="warn" (click)="evaluate('DISLIKE', element.id)">Dislike</button>
+                            <button mat-stroked-button color="primary"
+                                (click)="evaluate('LIKE', element.id)">Like</button>
+                            <button mat-stroked-button color="warn"
+                                (click)="evaluate('DISLIKE', element.id)">Dislike</button>
                         </div>
                     </div>
                 </div>
             </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+        <tr mat-header-row *matHeaderRowDef="columnsNames"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsNames;" class="example-element-row"
             [class.example-expanded-row]="expandedElement === element"
             (click)="expandedElement = expandedElement === element ? null : element">
         </tr>

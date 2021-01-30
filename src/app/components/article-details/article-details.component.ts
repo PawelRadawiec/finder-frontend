@@ -22,7 +22,13 @@ import { ArticleActions } from 'src/app/store/article.actions';
   ],
 })
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
-  columnsToDisplay = ['author', 'likes', 'dislikes', 'shortText'];
+  columnsData = [
+    {columnName: 'author', fieldName: 'author'}, 
+    {columnName: 'comment', fieldName: 'shortText'}, 
+    {columnName: 'likes', fieldName: 'likes'}, 
+    {columnName: 'dislikes', fieldName: 'dislikes'},
+  ];
+  columnsNames = [];
   expandedElement: Comment | null;
   article: Article;
 
@@ -34,6 +40,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.ratingValues.set('LIKE', true);
     this.ratingValues.set('DISLIKE', false);
+    this.columnsNames = this.columnsData.map(column => column.columnName);
     this.subscription = this.store.select(ArticleState.article).subscribe(
       article => this.handleArticleSubscribe(article)
     )
@@ -57,6 +64,10 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
       author: 'pawelr123'
     };
     this.store.dispatch(new ArticleActions.EvaluateCommentRequest(this.article.id, commentId, ratting))
+  }
+
+  displayLikeDislike(columnName: string) {
+    return ['likes', 'dislikes'].includes(columnName);
   }
 
 }

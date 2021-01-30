@@ -32,16 +32,19 @@ import { MatTableModule } from '@angular/material/table';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const materialModules = [
   MatIconModule,
   MatCardModule,
+  MatBadgeModule,
   MatInputModule,
   MatChipsModule,
   MatTableModule,
   MatButtonModule,
   MatToolbarModule,
   MatDividerModule,
+
   MatAutocompleteModule
 ];
 
