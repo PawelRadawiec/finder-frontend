@@ -9,8 +9,11 @@ import { ArticlesResolver } from './resolvers/articles.resolver';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: '/articles', pathMatch: 'full'
+  },
+  {
     path: 'articles',
-    component: ArticleListComponent, 
+    component: ArticleListComponent,
     resolve: [ArticlesResolver]
   },
   {

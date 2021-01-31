@@ -35,6 +35,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { SettingsState } from './store/settings/settings.state';
 import { ShortTextPipe } from './pipes/short-text.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 const materialModules = [
   MatIconModule,
@@ -74,7 +75,8 @@ const ngxsModules = [
     ArticleDetailsComponent,
     CommentFormComponent,
     // pipes
-    ShortTextPipe
+    ShortTextPipe,
+    FooterComponent
   ],
   imports: [
     ngxsModules,

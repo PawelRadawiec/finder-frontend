@@ -18,6 +18,6 @@
         </div>
     </mat-card-content>
     <mat-card-actions *ngIf="showCommentsButton">
-        <button mat-button (click)="details()">Comments</button>
+        <button mat-raised-button [matBadge]="article?.comments?.length" (click)="details()">Comments</button>
     </mat-card-actions>
 </mat-card>

@@ -26,7 +26,9 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.store.select(ArticleState.article).subscribe(article => this.handleArticleSubscribe(article));
+    this.subscription = this.store.select(ArticleState.article).subscribe(
+      article => this.handleArticleSubscribe(article)
+    );
     this.commentForm = this.formBuilder.group({
       comment: ['']
     });
