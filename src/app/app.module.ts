@@ -36,6 +36,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { SettingsState } from './store/settings/settings.state';
 import { ShortTextPipe } from './pipes/short-text.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { UserState } from './store/user/user.state';
 
 const materialModules = [
   MatIconModule,
@@ -53,6 +55,7 @@ const materialModules = [
 
 const ngxsModules = [
   NgxsModule.forRoot([
+    UserState,
     ErrorState,
     ArticleState,
     SettingsState
@@ -74,9 +77,10 @@ const ngxsModules = [
     TagChipsComponent,
     ArticleDetailsComponent,
     CommentFormComponent,
+    FooterComponent,
+    RegistrationFormComponent,
     // pipes
-    ShortTextPipe,
-    FooterComponent
+    ShortTextPipe
   ],
   imports: [
     ngxsModules,

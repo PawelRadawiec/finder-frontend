@@ -1,0 +1,56 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username"
+                [errorStateMatcher]="errorHelper.getMatcher('username')">
+            <mat-error>
+                {{errorHelper?.getMatcher('username')?.message}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="First name" formControlName="firstName"
+                [errorStateMatcher]="errorHelper.getMatcher('firstName')">
+            <mat-error>
+                {{errorHelper?.getMatcher('firstName')?.message}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Last name" formControlName="lastName"
+                [errorStateMatcher]="errorHelper.getMatcher('lastName')">
+            <mat-error>
+                {{errorHelper?.getMatcher('lastName')?.message}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email"
+                [errorStateMatcher]="errorHelper.getMatcher('email')">
+            <mat-error>
+                {{errorHelper?.getMatcher('email')?.message}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="password"
+                [errorStateMatcher]="errorHelper.getMatcher('password')">
+            <mat-error>
+                {{errorHelper?.getMatcher('password')?.message}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button mat-raised-button type="submit" color="primary">Registration</button>
+    </div>
+</form>

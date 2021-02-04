@@ -4,6 +4,7 @@ import { ArticleDetailsComponent } from './components/article-details/article-de
 import { ArticleFormComponent } from './components/article-form/article-form.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ArticleResolver } from './resolvers/article.resolver';
 import { ArticlesResolver } from './resolvers/articles.resolver';
 
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'details/:id',
     component: ArticleDetailsComponent,
     resolve: [ArticleResolver]
+  },
+  {
+    path: 'registration',
+    component: RegistrationFormComponent
   },
   {
     path: '**',
