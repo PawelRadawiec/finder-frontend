@@ -42,7 +42,7 @@
     <div class="form-group">
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" formControlName="password"
+            <input matInput type="password" placeholder="Password" formControlName="password"
                 [errorStateMatcher]="errorHelper.getMatcher('password')">
             <mat-error>
                 {{errorHelper?.getMatcher('password')?.message}}

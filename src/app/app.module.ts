@@ -38,6 +38,7 @@ import { ShortTextPipe } from './pipes/short-text.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { UserState } from './store/user/user.state';
+import { authInterceptorProviders } from './intercepter/authorization.interceptor';
 
 const materialModules = [
   MatIconModule,
@@ -93,7 +94,7 @@ const ngxsModules = [
     TextFieldModule,
     materialModules
   ],
-  providers: [errorInterceptorProviders],
+  providers: [errorInterceptorProviders, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
