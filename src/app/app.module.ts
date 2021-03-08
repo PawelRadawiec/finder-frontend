@@ -39,6 +39,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { UserState } from './store/user/user.state';
 import { authInterceptorProviders } from './intercepter/authorization.interceptor';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 const materialModules = [
   MatIconModule,
@@ -50,7 +51,6 @@ const materialModules = [
   MatButtonModule,
   MatToolbarModule,
   MatDividerModule,
-
   MatAutocompleteModule
 ];
 
@@ -81,7 +81,8 @@ const ngxsModules = [
     FooterComponent,
     RegistrationFormComponent,
     // pipes
-    ShortTextPipe
+    ShortTextPipe,
+    LoginFormComponent
   ],
   imports: [
     ngxsModules,

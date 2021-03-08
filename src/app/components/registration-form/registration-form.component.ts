@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { User } from 'src/app/models/user.model';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
-import { UserActoins } from 'src/app/store/user/user.actions';
+import { UserActions } from 'src/app/store/user/user.actions';
 
 @Component({
   selector: 'app-registration-form',
@@ -25,7 +25,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.dispatch(new UserActoins.RegistrationRequest(new User(this.registrationForm.value)))
+    this.store.dispatch(new UserActions.RegistrationRequest(new User(this.registrationForm.value)))
   }
 
   private setRegistrationForm() {

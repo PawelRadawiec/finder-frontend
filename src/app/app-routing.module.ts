@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticleDetailsComponent } from './components/article-details/article-details.component';
 import { ArticleFormComponent } from './components/article-form/article-form.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { ArticleResolver } from './resolvers/article.resolver';
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationFormComponent
+  },
+  {
+    path: 'login',
+    component: LoginFormComponent
   },
   {
     path: '**',

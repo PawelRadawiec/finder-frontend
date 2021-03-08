@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
+import { Navigate } from "@ngxs/router-plugin";
 import { Action, State, StateContext, Store } from "@ngxs/store";
 import { mergeMap } from "rxjs/operators";
 import { User } from "src/app/models/user.model";
+import { TokenStorageService } from "src/app/service/token-storage.service";
 import { UserService } from "src/app/service/user.service";
-import { UserActoins } from "./user.actions";
+import { UserActions } from "./user.actions";
 
 export interface UserSateModel {
     user: User
@@ -21,21 +23,42 @@ export class UserState {
 
     constructor(
         private store: Store,
-        private userService: UserService
+        private userService: UserService,
+        private tokenStorage: TokenStorageService
     ) {
 
     }
 
-    @Action(UserActoins.RegistrationRequest)
-    registrationRequest(state: StateContext<UserSateModel>, action: UserActoins.RegistrationRequest) {
+    @Action(UserActions.RegistrationRequest)
+    registrationRequest(state: StateContext<UserSateModel>, action: UserActions.RegistrationRequest) {
         return this.userService.registration(action.request).pipe(
-            mergeMap(response => this.store.dispatch(new UserActoins.RegistrationResponse(response)))
+            mergeMap(response => this.store.dispatch(new UserActions.RegistrationResponse(response)))
         )
     }
 
-    @Action(UserActoins.RegistrationResponse)
-    registrationResponse(state: StateContext<UserSateModel>, action: UserActoins.RegistrationResponse) {
+    @Action(UserActions.RegistrationResponse)
+    registrationResponse(state: StateContext<UserSateModel>, action: UserActions.RegistrationResponse) {
         console.log('response: ', action.response);
+    }
+
+    @Action(UserActions.LoginRequest)
+    loginRequest(state: StateContext<UserSateModel>, action: UserActions.LoginRequest) {
+        return this.userService.login(action.request).pipe(
+            mergeMap(response => this.store.dispatch(new UserActions.LoginResponse(response)))
+        )
+    }
+
+    @Action(UserActions.LoginResponse)
+    loginResponse(state: StateContext<UserSateModel>, action: UserActions.LoginResponse) {
+        console.log('LOGIN RESPONSE: ', action.response);
+        const response = action.response;
+        this.tokenStorage.saveToken(response.jwt);
+        this.tokenStorage.saveUser({
+            id: response.userId,
+            email: response.email,
+            username: response.username
+        });
+        this.store.dispatch(new Navigate(['articles']))
     }
 
 
