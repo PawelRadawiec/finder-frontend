@@ -37,7 +37,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    component: ArticleListComponent,
+    resolve: [ArticlesResolver]
   },
 ];
 

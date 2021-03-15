@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
-import { Action, State, StateContext, Store } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { mergeMap } from "rxjs/operators";
 import { User } from "src/app/models/user.model";
 import { TokenStorageService } from "src/app/service/token-storage.service";
@@ -8,14 +8,16 @@ import { UserService } from "src/app/service/user.service";
 import { UserActions } from "./user.actions";
 
 export interface UserSateModel {
-    user: User
+    user: User,
+    logged: boolean;
 }
 
 
 @State<UserSateModel>({
     name: 'user',
     defaults: {
-        user: null
+        user: null,
+        logged: false
     }
 })
 @Injectable()
@@ -27,6 +29,11 @@ export class UserState {
         private tokenStorage: TokenStorageService
     ) {
 
+    }
+
+    @Selector()
+    static logged(state: UserSateModel) {
+        return state.logged;
     }
 
     @Action(UserActions.RegistrationRequest)
@@ -50,15 +57,25 @@ export class UserState {
 
     @Action(UserActions.LoginResponse)
     loginResponse(state: StateContext<UserSateModel>, action: UserActions.LoginResponse) {
-        console.log('LOGIN RESPONSE: ', action.response);
         const response = action.response;
         this.tokenStorage.saveToken(response.jwt);
-        this.tokenStorage.saveUser({
-            id: response.userId,
-            email: response.email,
-            username: response.username
+        const user = new User();
+        user.id = response.userId;
+        user.email = response.email;
+        user.username = response.username;
+        this.tokenStorage.saveUser(user);
+        state.patchState({
+            user,
+            logged: true
         });
-        this.store.dispatch(new Navigate(['articles']))
+        this.store.dispatch(new Navigate(['articles']));
+    }
+
+    @Action(UserActions.SetLogged)
+    setLogged(state: StateContext<UserSateModel>, action: UserActions.SetLogged) {
+        state.patchState({
+            logged: action.logged
+        })
     }
 
 

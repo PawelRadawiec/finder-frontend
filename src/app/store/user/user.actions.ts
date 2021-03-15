@@ -30,5 +30,13 @@ export namespace UserActions {
 
     }
 
+    export class SetLogged {
+        static readonly type = '[User] SetLogged';
+
+        constructor(public logged: boolean) {
+
+        }
+    }
+
 
 }
