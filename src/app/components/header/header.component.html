@@ -15,19 +15,15 @@
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-icon-button>
-                <mat-icon *ngIf="!logged">login</mat-icon>
-                <mat-icon *ngIf="logged">logout</mat-icon>
-            </button>
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item *ngIf="!logged">
+                <button mat-menu-item *ngIf="!logged" routerLink="/login" routerLinkActive="active">
                     <mat-icon>login</mat-icon>
                     <span>Login</span>
                 </button>
-                <button mat-menu-item *ngIf="logged">
+                <button mat-menu-item *ngIf=" logged">
                     <mat-icon>logout</mat-icon>
                     <span>Logout</span>
                 </button>

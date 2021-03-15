@@ -12,7 +12,6 @@ export interface UserSateModel {
     logged: boolean;
 }
 
-
 @State<UserSateModel>({
     name: 'user',
     defaults: {

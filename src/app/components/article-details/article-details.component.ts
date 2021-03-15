@@ -8,6 +8,7 @@ import { Comment } from 'src/app/models/comment.model';
 import * as _ from 'lodash';
 import { ArticleActions } from 'src/app/store/article.actions';
 import { SettingsState } from 'src/app/store/settings/settings.state';
+import { UserState } from 'src/app/store/user/user.state';
 
 
 @Component({
@@ -30,11 +31,12 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     {columnName: 'likes', fieldName: 'likes'}, 
     {columnName: 'dislikes', fieldName: 'dislikes'},
   ];
+  logged: boolean;
   columnsNames = [];
   expandedElement: Comment | null;
   article: Article;
 
-  private subscription: Subscription;
+  private subscription = new Subscription();
   private ratingValues: Map<string, boolean> = new Map<string, boolean>();
 
   constructor(private store: Store) { }
@@ -43,8 +45,13 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.ratingValues.set('LIKE', true);
     this.ratingValues.set('DISLIKE', false);
     this.columnsNames = this.columnsData.map(column => column.columnName);
-    this.subscription = this.store.select(ArticleState.article).subscribe(
-      article => this.handleArticleSubscribe(article)
+    this.subscription.add(
+      this.store.select(ArticleState.article).subscribe(
+        article => this.handleArticleSubscribe(article)
+      )
+    );
+    this.subscription.add(
+      this.store.select(UserState.logged).subscribe(logged => this.logged = logged)
     )
   }
 

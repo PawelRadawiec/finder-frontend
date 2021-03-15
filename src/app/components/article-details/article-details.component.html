@@ -2,7 +2,7 @@
     <div>
         <app-article [article]="article" [showCommentsButton]="false"></app-article>
     </div>
-    <app-comment-form></app-comment-form>
+    <app-comment-form *ngIf="logged"></app-comment-form>
     <table mat-table [dataSource]="article?.comments" multiTemplateDataRows class="mat-elevation-z8">
         <ng-container matColumnDef="{{column.columnName}}" *ngFor="let column of columnsData">
             <th mat-header-cell *matHeaderCellDef>
@@ -38,7 +38,7 @@
                         <div>
                             {{element.text}}
                         </div>
-                        <div>
+                        <div *ngIf="logged">
                             <button mat-stroked-button color="primary"
                                 (click)="evaluate('LIKE', element.id)">Like</button>
                             <button mat-stroked-button color="warn"
