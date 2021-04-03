@@ -16,7 +16,7 @@ export class UserService {
   ) { }
 
   registration(request: User) {
-    return this.http.post<User>(`${this.baseUrl}/signup`, request);
+    return this.http.post<any>(`${this.baseUrl}/signup`, request);
   }
 
   login(request: LoginRequestModel) {

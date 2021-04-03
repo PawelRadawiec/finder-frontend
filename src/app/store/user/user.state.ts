@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
-import { mergeMap } from "rxjs/operators";
+import { of } from "rxjs";
+import { catchError, mergeMap } from "rxjs/operators";
+import { RegistrationResponseModel } from "src/app/models/registration-response.model";
 import { User } from "src/app/models/user.model";
 import { TokenStorageService } from "src/app/service/token-storage.service";
 import { UserService } from "src/app/service/user.service";
@@ -10,13 +12,17 @@ import { UserActions } from "./user.actions";
 export interface UserSateModel {
     user: User,
     logged: boolean;
+    registerLoading: boolean;
+    registrationResponseModel: RegistrationResponseModel;
 }
 
 @State<UserSateModel>({
     name: 'user',
     defaults: {
         user: null,
-        logged: false
+        logged: false,
+        registerLoading: false,
+        registrationResponseModel: null
     }
 })
 @Injectable()
@@ -35,16 +41,32 @@ export class UserState {
         return state.logged;
     }
 
-    @Action(UserActions.RegistrationRequest)
-    registrationRequest(state: StateContext<UserSateModel>, action: UserActions.RegistrationRequest) {
-        return this.userService.registration(action.request).pipe(
-            mergeMap(response => this.store.dispatch(new UserActions.RegistrationResponse(response)))
-        )
+    @Selector()
+    static registrationResponseModel(state: UserSateModel) {
+        return state.registrationResponseModel;
     }
 
-    @Action(UserActions.RegistrationResponse)
-    registrationResponse(state: StateContext<UserSateModel>, action: UserActions.RegistrationResponse) {
-        console.log('response: ', action.response);
+    @Selector()
+    static registerLoading(state: UserSateModel) {
+        return state.registerLoading;
+    }
+
+    @Action(UserActions.RegistrationRequest)
+    registrationRequest(state: StateContext<UserSateModel>, action: UserActions.RegistrationRequest) {
+        state.patchState({
+            registerLoading: true
+        });
+        return this.userService.registration(action.request).pipe(
+            mergeMap(response => {
+                state.patchState({
+                    registerLoading: false
+                });
+                const registrationResponse = new RegistrationResponseModel({ ...response });
+                registrationResponse.created = true;
+                return this.store.dispatch(new UserActions.SetCreated(registrationResponse))
+            }),
+            catchError(() => this.store.dispatch(new UserActions.UserFailed()))
+        )
     }
 
     @Action(UserActions.LoginRequest)
@@ -77,5 +99,24 @@ export class UserState {
         })
     }
 
+    @Action(UserActions.SetCreated)
+    setCreated(
+        state: StateContext<UserSateModel>,
+        action: UserActions.SetCreated
+    ) {
+        state.patchState({
+            registrationResponseModel: action.registrationResponseModel
+        })
+    }
+
+    @Action(UserActions.UserFailed)
+    userFailed(
+        state: StateContext<UserSateModel>,
+        action: UserActions.UserFailed
+    ) {
+        state.patchState({
+            registerLoading: false
+        })
+    }
 
 }

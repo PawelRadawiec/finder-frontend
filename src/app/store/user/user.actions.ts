@@ -1,5 +1,6 @@
 import { LoginRequestModel } from "src/app/models/login-request.model";
 import { LoginResponseModel } from "src/app/models/login-response.model";
+import { RegistrationResponseModel } from "src/app/models/registration-response.model";
 import { User } from "src/app/models/user.model";
 
 export namespace UserActions {
@@ -8,12 +9,6 @@ export namespace UserActions {
         static readonly type = '[User] RegistrationRequest';
 
         constructor(public request: User) { }
-    }
-
-    export class RegistrationResponse {
-        static readonly type = '[User] RegistrationResponse';
-
-        constructor(public response: any) { }
     }
 
     export class LoginRequest {
@@ -36,6 +31,21 @@ export namespace UserActions {
         constructor(public logged: boolean) {
 
         }
+    }
+
+    export class SetCreated {
+        static readonly type = '[User] SetCreated';
+
+        constructor(public registrationResponseModel: RegistrationResponseModel) {
+        }
+    }
+
+    export class UserFailed {
+        static readonly type = '[User] UserFailed';
+
+        constructor() {
+        }
+
     }
 
 

@@ -41,6 +41,8 @@ import { UserState } from './store/user/user.state';
 import { authInterceptorProviders } from './intercepter/authorization.interceptor';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 const materialModules = [
   MatIconModule,
@@ -54,6 +56,7 @@ const materialModules = [
   MatDividerModule,
   MatMenuModule,
   MatAutocompleteModule,
+  MatProgressSpinnerModule
 ];
 
 const ngxsModules = [
@@ -95,7 +98,8 @@ const ngxsModules = [
     BrowserAnimationsModule,
     FlexLayoutModule,
     TextFieldModule,
-    materialModules
+    materialModules,
+    CommonModule
   ],
   providers: [errorInterceptorProviders, authInterceptorProviders],
   bootstrap: [AppComponent]
