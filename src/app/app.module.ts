@@ -43,6 +43,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { ActivateComponent } from './components/activate/activate.component';
 
 const materialModules = [
   MatIconModule,
@@ -87,7 +88,8 @@ const ngxsModules = [
     RegistrationFormComponent,
     // pipes
     ShortTextPipe,
-    LoginFormComponent
+    LoginFormComponent,
+    ActivateComponent
   ],
   imports: [
     ngxsModules,

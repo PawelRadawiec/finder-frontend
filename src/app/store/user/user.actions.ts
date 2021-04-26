@@ -1,5 +1,6 @@
 import { LoginRequestModel } from "src/app/models/login-request.model";
 import { LoginResponseModel } from "src/app/models/login-response.model";
+import { MessageResponse } from "src/app/models/message-response.model";
 import { RegistrationResponseModel } from "src/app/models/registration-response.model";
 import { User } from "src/app/models/user.model";
 
@@ -44,6 +45,24 @@ export namespace UserActions {
         static readonly type = '[User] UserFailed';
 
         constructor() {
+        }
+
+    }
+
+    export class ActivateRequest {
+        static readonly type = '[User] ActivateRequest';
+
+        constructor(public id: string) {
+
+        }
+
+    }
+
+    export class ActivateResponse {
+        static readonly type = '[User] ActivateResponse';
+
+        constructor(public response: MessageResponse) {
+
         }
 
     }

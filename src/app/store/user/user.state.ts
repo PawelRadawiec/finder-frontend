@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
-import { of } from "rxjs";
 import { catchError, mergeMap } from "rxjs/operators";
+import { MessageResponse } from "src/app/models/message-response.model";
 import { RegistrationResponseModel } from "src/app/models/registration-response.model";
 import { User } from "src/app/models/user.model";
 import { TokenStorageService } from "src/app/service/token-storage.service";
@@ -10,6 +10,7 @@ import { UserService } from "src/app/service/user.service";
 import { UserActions } from "./user.actions";
 
 export interface UserSateModel {
+    activateMessage: MessageResponse;
     user: User,
     logged: boolean;
     registerLoading: boolean;
@@ -19,6 +20,7 @@ export interface UserSateModel {
 @State<UserSateModel>({
     name: 'user',
     defaults: {
+        activateMessage: null,
         user: null,
         logged: false,
         registerLoading: false,
@@ -34,6 +36,11 @@ export class UserState {
         private tokenStorage: TokenStorageService
     ) {
 
+    }
+
+    @Selector()
+    static activateMessage(state: UserSateModel) {
+        return state.activateMessage;
     }
 
     @Selector()
@@ -106,6 +113,26 @@ export class UserState {
     ) {
         state.patchState({
             registrationResponseModel: action.registrationResponseModel
+        })
+    }
+
+    @Action(UserActions.ActivateRequest)
+    activate(
+        state: StateContext<UserSateModel>,
+        action: UserActions.ActivateRequest
+    ) {
+        return this.userService.activate(action.id).pipe(
+            mergeMap(response => this.store.dispatch(new UserActions.ActivateResponse(response)))
+        )
+    }
+
+    @Action(UserActions.ActivateResponse)
+    activateResponse(
+        state: StateContext<UserSateModel>,
+        action: UserActions.ActivateResponse
+    ) {
+        state.patchState({
+            activateMessage: action.response
         })
     }
 
