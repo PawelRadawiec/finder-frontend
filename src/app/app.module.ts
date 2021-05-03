@@ -44,6 +44,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { ActivateComponent } from './components/activate/activate.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const materialModules = [
   MatIconModule,
@@ -57,7 +58,8 @@ const materialModules = [
   MatDividerModule,
   MatMenuModule,
   MatAutocompleteModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatStepperModule
 ];
 
 const ngxsModules = [

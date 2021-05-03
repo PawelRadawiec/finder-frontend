@@ -27,7 +27,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.setRegistrationForm();
+    this.setForm();
     this.subscription.add(
       this.store.select(UserState.registrationResponseModel).subscribe(registrationResponseModel => this.registrationResponseModel = registrationResponseModel)
     );
@@ -42,14 +42,14 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
     this.store.dispatch(new UserActions.SetCreated(null));
   }
 
-  private setRegistrationForm() {
+  private setForm() {
     this.registrationForm = this.formBuilder.group({
       username: [''],
       firstName: [''],
       lastName: [''],
       email: [''],
       password: ['']
-    })
+    });
   }
 
 }

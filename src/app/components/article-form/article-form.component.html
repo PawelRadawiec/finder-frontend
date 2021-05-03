@@ -1,51 +1,75 @@
-<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Title</mat-label>
-                <input matInput placeholder="Title" formControlName="title"
-                    [errorStateMatcher]="errorHelper.getMatcher('title')">
-                <mat-error *ngIf="errorHelper?.getMatcher('title')?.hasError">
-                    {{errorHelper?.getMatcher('title')?.message}}
-                </mat-error>
-            </mat-form-field>
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="articleForm">
+            <ng-template matStepLabel>Fill out required data</ng-template>
+            <div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Title" formControlName="title"
+                            [errorStateMatcher]="errorHelper.getMatcher('article.title')">
+                        <mat-error>
+                            {{errorHelper?.getMatcher('article.title')?.message}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Article url</mat-label>
+                        <input matInput placeholder="Article" formControlName="url"
+                            [errorStateMatcher]="errorHelper.getMatcher('article.url')">
+                        <mat-error>
+                            {{errorHelper?.getMatcher('article.url')?.message}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Picture url</mat-label>
+                        <input matInput placeholder="Pictuure url" formControlName="pictureUrl"
+                            [errorStateMatcher]="errorHelper.getMatcher('article.pictureUrl')">
+                        <mat-error>
+                            {{errorHelper?.getMatcher('article.pictureUrl')?.message}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                            formControlName="description" placeholder="Description" cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5"
+                            [errorStateMatcher]="errorHelper.getMatcher('article.description')"></textarea>
+                        <mat-error>
+                            {{errorHelper?.getMatcher('article.description')?.message}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class=form-group>
+                    <app-tag-chips [form]="articleForm"></app-tag-chips>
+                </div>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="stepAction(targetStep.NEXT)">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Article summary</ng-template>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button color="primary" (click)="stepAction(targetStep.BACK)">Back</button>
+                <button mat-raised-button color="primary" (click)="stepAction(targetStep.NEXT)">Next</button>
+            </div>
+
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button color="primary" (click)="stepAction(targetStep.BACK)">Back</button>
+            <button mat-raised-button color="primary" (click)="stepAction(targetStep.NEXT)">Save</button>
         </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Article url</mat-label>
-                <input matInput placeholder="Article" formControlName="url"
-                    [errorStateMatcher]="errorHelper.getMatcher('url')">
-                <mat-error *ngIf="errorHelper?.getMatcher('url')?.hasError">
-                    {{errorHelper?.getMatcher('url')?.message}}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Picture url</mat-label>
-                <input matInput placeholder="Pictuure url" formControlName="pictureUrl"
-                    [errorStateMatcher]="errorHelper.getMatcher('pictureUrl')">
-                <mat-error *ngIf="errorHelper?.getMatcher('pictureUrl')?.hasError">
-                    {{errorHelper?.getMatcher('pictureUrl')?.message}}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Description</mat-label>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" formControlName="description"
-                    placeholder="Description" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
-                    [errorStateMatcher]="errorHelper.getMatcher('description')"></textarea>
-                <mat-error *ngIf="errorHelper?.getMatcher('description')?.hasError">
-                    {{errorHelper?.getMatcher('description')?.message}}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class=form-group>
-            <app-tag-chips [form]="articleForm"></app-tag-chips>
-        </div>
-    </div>
-    <div>
-        <button mat-raised-button type="submit" color="primary">Save</button>
-    </div>
-</form>
+    </mat-step>
+</mat-horizontal-stepper>

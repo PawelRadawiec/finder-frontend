@@ -1,3 +1,4 @@
+import { ArticleRegistration } from "../models/article-registration.model";
 import { Article } from "../models/article.model";
 import { Comment } from "../models/comment.model";
 
@@ -20,7 +21,7 @@ export namespace ArticleActions {
     export class ArticleFormRequest {
         static readonly type = '[Article] ArticleFormRequest';
 
-        constructor(public article: Article) { }
+        constructor(public registration: ArticleRegistration) { }
 
     }
 
@@ -42,6 +43,12 @@ export namespace ArticleActions {
         static readonly type = '[Article] SetArticle';
 
         constructor(public article: Article) { }
+    }
+
+    export class SetRegistraton {
+        static readonly type = '[Article] SetRegistraton';
+
+        constructor(public registration: ArticleRegistration) { }
     }
 
     export class AddComment {

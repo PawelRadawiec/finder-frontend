@@ -5,16 +5,20 @@ import { ArticleService } from "../service/article.service";
 import { ArticleActions } from "./article.actions";
 import { mergeMap } from 'rxjs/operators';
 import { Navigate } from "@ngxs/router-plugin";
+import { ArticleRegistration } from "../models/article-registration.model";
 
 export interface ArticleStateModel {
     article: Article;
     articles: Article[];
+    registration: ArticleRegistration;
 }
 
 @State({
     name: 'article',
     defaults: {
-        articles: []
+        article: null,
+        articles: [],
+        registration: null
     }
 })
 @Injectable()
@@ -36,6 +40,11 @@ export class ArticleState {
         return state.articles;
     }
 
+    @Selector()
+    static registration(state: ArticleStateModel) {
+        return state.registration;
+    }
+
     @Action(ArticleActions.SearchArticlesRequest)
     searchRequest(state: StateContext<ArticleStateModel>, action: ArticleActions.SearchArticlesRequest) {
         return this.articleService.search().pipe(
@@ -52,9 +61,16 @@ export class ArticleState {
 
     @Action(ArticleActions.ArticleFormRequest)
     createRequest(state: StateContext<ArticleStateModel>, action: ArticleActions.ArticleFormRequest) {
-        return this.articleService.create(action.article).pipe(
-            mergeMap(article => this.store.dispatch(new ArticleActions.SetArticle(article)))
+        return this.articleService.create(action.registration).pipe(
+            mergeMap(registration => this.store.dispatch(new ArticleActions.SetRegistraton(registration)))
         );
+    }
+
+    @Action(ArticleActions.SetRegistraton)
+    setRegistration(state: StateContext<ArticleStateModel>, action: ArticleActions.SetRegistraton) {
+        state.patchState({
+            registration: action.registration
+        });
     }
 
     @Action(ArticleActions.GetByIdRequest)

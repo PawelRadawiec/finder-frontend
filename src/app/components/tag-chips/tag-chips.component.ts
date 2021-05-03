@@ -83,7 +83,7 @@ export class TagChipsComponent implements OnInit {
 
   hasError() {
     if (this.chipList) {
-      this.chipList.errorState = this.errorHelper?.getMatcher('tags')?.hasError;
+      this.chipList.errorState = this.errorHelper?.getMatcher('article.tags')?.hasError;
     }
 
   }

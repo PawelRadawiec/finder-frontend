@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ArticleRegistration } from '../models/article-registration.model';
 import { Article } from '../models/article.model';
 import { Comment } from '../models/comment.model';
 
@@ -19,8 +20,8 @@ export class ArticleService {
     return this.http.get<Article[]>(`${this.baseUrl}/search`);
   }
 
-  create(article: Article) {
-    return this.http.post<Article>(`${this.baseUrl}/create`, article);
+  create(registration: ArticleRegistration) {
+    return this.http.post<ArticleRegistration>(`${this.baseUrl}/registration`, registration);
   }
 
   getById(id: string) {
