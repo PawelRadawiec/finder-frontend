@@ -5,11 +5,12 @@ import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { SystemStateMatcher } from 'src/app/matcher/system-error-state.matcher';
 import { ArticleRegistration, ArticleStep, TargetStep } from 'src/app/models/article-registration.model';
-import { Article } from 'src/app/models/article.model';
+import { Article, ArticleStatus } from 'src/app/models/article.model';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
 import { ArticleActions } from 'src/app/store/article.actions';
 import { ArticleState } from 'src/app/store/article.state';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-form',
@@ -31,7 +32,8 @@ export class ArticleFormComponent implements OnInit {
   constructor(
     private store: Store,
     private formBuilder: FormBuilder,
-    public errorHelper: ErrorStateMatcherHelperService
+    public errorHelper: ErrorStateMatcherHelperService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -95,10 +97,17 @@ export class ArticleFormComponent implements OnInit {
         this.stepper.selectedIndex = 1;
         break;
       case ArticleStep.DONE:
-        this.stepper.selectedIndex = 2;
+        this.handleDoneStatus();
         break;
       default:
         this.stepper.selectedIndex = 0;
+    }
+  }
+
+  private handleDoneStatus() {
+    this.stepper.selectedIndex = 2;
+    if (this.registration.article.status === ArticleStatus.SAVED) {
+      this.router.navigate(['/articles']);
     }
   }
 

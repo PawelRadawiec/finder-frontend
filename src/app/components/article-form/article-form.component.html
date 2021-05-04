@@ -57,6 +57,7 @@
     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Article summary</ng-template>
+            <app-article [article]="registration?.article" [showCommentsButton]="false"></app-article>
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <button mat-raised-button color="primary" (click)="stepAction(targetStep.BACK)">Back</button>
                 <button mat-raised-button color="primary" (click)="stepAction(targetStep.NEXT)">Next</button>
@@ -66,7 +67,7 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <p>Article is done. If you are ready click save button.</p>
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <button mat-raised-button color="primary" (click)="stepAction(targetStep.BACK)">Back</button>
             <button mat-raised-button color="primary" (click)="stepAction(targetStep.NEXT)">Save</button>
