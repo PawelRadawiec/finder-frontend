@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { ArticleActions } from 'src/app/store/article.actions';
 import { SettingsState } from 'src/app/store/settings/settings.state';
 import { UserState } from 'src/app/store/user/user.state';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -26,10 +27,10 @@ import { UserState } from 'src/app/store/user/user.state';
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
   @Select(SettingsState.xsDevice) xsDevice$: Observable<boolean>;
   columnsData = [
-    {columnName: 'author', fieldName: 'author'}, 
-    {columnName: 'comment', fieldName: 'shortText'}, 
-    {columnName: 'likes', fieldName: 'likes'}, 
-    {columnName: 'dislikes', fieldName: 'dislikes'},
+    { columnName: 'author', fieldName: 'author' },
+    { columnName: 'comment', fieldName: 'shortText' },
+    { columnName: 'likes', fieldName: 'likes' },
+    { columnName: 'dislikes', fieldName: 'dislikes' },
   ];
   logged: boolean;
   columnsNames = [];
@@ -59,24 +60,23 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  displayLikeDislike(columnName: string) {
+    return ['likes', 'dislikes'].includes(columnName);
+  }
+
+  evaluate(type: string, commentId: number) {
+    const ratting = {
+      value: this.ratingValues.get(type)
+    };
+    this.store.dispatch(new ArticleActions.EvaluateCommentRequest(this.article.id, commentId, ratting))
+  }
+
   private handleArticleSubscribe(article: Article) {
     this.article = _.cloneDeep(article);
     this.article.comments.forEach(comment => {
       comment.likes = comment?.ratings?.filter(rating => rating.value)?.length;
       comment.dislikes = comment?.ratings?.filter(rating => !rating.value)?.length;
     })
-  }
-
-  evaluate(type: string, commentId: number) {
-    const ratting = {
-      value: this.ratingValues.get(type),
-      author: 'pawelr123'
-    };
-    this.store.dispatch(new ArticleActions.EvaluateCommentRequest(this.article.id, commentId, ratting))
-  }
-
-  displayLikeDislike(columnName: string) {
-    return ['likes', 'dislikes'].includes(columnName);
   }
 
 }

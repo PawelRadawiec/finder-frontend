@@ -1,9 +1,8 @@
-.example-card {
-    max-width: 400px;
-    /* padding-top: 100px; */
+.article-card {
+    max-width: 600px;
   }
   
-  .example-header-image {
+  .header-image {
     background-image: url('https://www.lboro.ac.uk/media/wwwlboroacuk/external/content/services/itservices/ittoolkit/72287%20IT%20Services%20Website%20Icons%20AW-2.png');
     background-size: cover;
   }

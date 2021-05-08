@@ -4,9 +4,11 @@ import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article.model';
 import { Comment } from 'src/app/models/comment.model';
+import { User } from 'src/app/models/user.model';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
 import { ArticleActions } from 'src/app/store/article.actions';
 import { ArticleState } from 'src/app/store/article.state';
+import { UserState } from 'src/app/store/user/user.state';
 
 @Component({
   selector: 'app-comment-form',
@@ -46,7 +48,6 @@ export class CommentFormComponent implements OnInit, OnDestroy {
   onSubmit() {
     const comment = new Comment();
     comment.text = this.commentForm.value?.comment;
-    comment.author = 'mock';
     this.store.dispatch(new ArticleActions.AddComment(this.article.id, comment));
   }
 
