@@ -45,6 +45,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { ActivateComponent } from './components/activate/activate.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { NotificationComponent } from './components/notification/notification.component';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import { myRxStompConfig } from './my-rx-stomp.config';
 
 const materialModules = [
   MatIconModule,
@@ -91,7 +94,8 @@ const ngxsModules = [
     // pipes
     ShortTextPipe,
     LoginFormComponent,
-    ActivateComponent
+    ActivateComponent,
+    NotificationComponent
   ],
   imports: [
     ngxsModules,
@@ -105,7 +109,19 @@ const ngxsModules = [
     materialModules,
     CommonModule
   ],
-  providers: [errorInterceptorProviders, authInterceptorProviders],
+  providers: [
+    errorInterceptorProviders, 
+    authInterceptorProviders,
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig,
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig],
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
