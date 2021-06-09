@@ -1,1 +1,10 @@
-<p>{{messages.length}}</p>
+<div class="notification">
+    <mat-form-field class="notification-select">
+        <mat-icon [matBadge]="messages?.length" matBadgeColor="warn">alarm_on</mat-icon>
+        <mat-select class="alarm-dropdown" trigger="alarmTrigger" #alarmSelect>
+            <mat-option *ngFor="let message of messages" [value]="message.message">
+                {{message.message}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

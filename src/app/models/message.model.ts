@@ -8,7 +8,3 @@ export class Message {
     }
 
 }
-
-// private String to;
-//     private String from;
-//     private String message;

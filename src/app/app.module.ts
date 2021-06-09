@@ -48,6 +48,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NotificationComponent } from './components/notification/notification.component';
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 import { myRxStompConfig } from './my-rx-stomp.config';
+import {MatSelectModule } from '@angular/material/select';
 
 const materialModules = [
   MatIconModule,
@@ -62,7 +63,8 @@ const materialModules = [
   MatMenuModule,
   MatAutocompleteModule,
   MatProgressSpinnerModule,
-  MatStepperModule
+  MatStepperModule,
+  MatSelectModule
 ];
 
 const ngxsModules = [

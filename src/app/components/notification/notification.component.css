@@ -1,0 +1,20 @@
+.notification {
+    padding: 9px 15px;
+}
+
+.alarm-dropdown {
+    position: absolute;
+    padding: 4px 8px;
+  }
+  .alarm-dropdown /deep/.mat-select-arrow-wrapper {
+    visibility: hidden;
+  }
+  
+  .mat-form-field /deep/.mat-form-field-underline {
+    height: 0 !important;
+  }
+
+  .notification-select {
+      width: 10px;
+      font-size: small;
+  }
