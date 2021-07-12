@@ -1,6 +1,7 @@
-import { ArticleRegistration } from "../models/article-registration.model";
-import { Article } from "../models/article.model";
-import { Comment } from "../models/comment.model";
+import { ArticleRegistration } from "../../models/article-registration.model";
+import { Article } from "../../models/article.model";
+import { Comment } from "../../models/comment.model";
+
 
 export namespace ArticleActions {
 

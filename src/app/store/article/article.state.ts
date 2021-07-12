@@ -1,17 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
-import { Article } from "../models/article.model";
-import { ArticleService } from "../service/article.service";
-import { ArticleActions } from "./article.actions";
+import { Action, State, StateContext, Store } from "@ngxs/store";
+import { ArticleService } from "../../service/article.service";
 import { mergeMap } from 'rxjs/operators';
-import { Navigate } from "@ngxs/router-plugin";
-import { ArticleRegistration } from "../models/article-registration.model";
+import { ArticleActions } from "./article.actions";
+import { ArticleStateModel } from "./article-state.model";
 
-export interface ArticleStateModel {
-    article: Article;
-    articles: Article[];
-    registration: ArticleRegistration;
-}
 
 @State({
     name: 'article',
@@ -28,21 +21,6 @@ export class ArticleState {
         private store: Store,
         private articleService: ArticleService
     ) {
-    }
-
-    @Selector()
-    static article(state: ArticleStateModel) {
-        return state.article;
-    }
-
-    @Selector()
-    static articles(state: ArticleStateModel) {
-        return state.articles;
-    }
-
-    @Selector()
-    static registration(state: ArticleStateModel) {
-        return state.registration;
     }
 
     @Action(ArticleActions.SearchArticlesRequest)

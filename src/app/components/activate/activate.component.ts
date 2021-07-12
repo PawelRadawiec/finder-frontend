@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { MessageResponse } from 'src/app/models/message-response.model';
+import { UserSelectors } from 'src/app/store/user/user.selectors';
 import { UserState } from 'src/app/store/user/user.state';
 
 @Component({
@@ -17,7 +18,7 @@ export class ActivateComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(
-        this.store.select(UserState.activateMessage).subscribe(message => this.message = message)
+        this.store.select(UserSelectors.activateMessage).subscribe(message => this.message = message)
     )
   }
 

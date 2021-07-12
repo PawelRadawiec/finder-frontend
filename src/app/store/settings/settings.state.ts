@@ -1,10 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { Action, State, StateContext } from "@ngxs/store";
+import { SettingsStateModel } from "./settings-state.model";
 import { SettingActions } from "./settings.actions";
-
-export interface SettingsStateModel {
-    xsDevice: boolean;
-}
 
 @State({
     name: 'settings',
@@ -16,12 +13,6 @@ export interface SettingsStateModel {
 export class SettingsState {
 
     constructor() { }
-
-    @Selector()
-    static xsDevice(model: SettingsStateModel) {
-        return model.xsDevice;
-    }
-
 
     @Action(SettingActions.SetXsDevice)
     setXsDevice(state: StateContext<SettingsStateModel>, action: SettingActions.SetXsDevice) {

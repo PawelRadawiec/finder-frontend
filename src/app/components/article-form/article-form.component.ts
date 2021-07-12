@@ -1,16 +1,16 @@
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { SystemStateMatcher } from 'src/app/matcher/system-error-state.matcher';
 import { ArticleRegistration, ArticleStep, TargetStep } from 'src/app/models/article-registration.model';
 import { Article, ArticleStatus } from 'src/app/models/article.model';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
-import { ArticleActions } from 'src/app/store/article.actions';
-import { ArticleState } from 'src/app/store/article.state';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
+import { ArticleActions } from 'src/app/store/article/article.actions';
+import { ArticleSelectors } from 'src/app/store/article/article.selectors';
 
 @Component({
   selector: 'app-article-form',
@@ -39,7 +39,7 @@ export class ArticleFormComponent implements OnInit {
   ngOnInit() {
     this.setArticleForm();
     this.subscription.add(
-      this.store.select(ArticleState.registration).subscribe(registration => this.handleRegistration(registration))
+      this.store.select(ArticleSelectors.registration).subscribe(registration => this.handleRegistration(registration))
     )
   }
 

@@ -2,14 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observable, Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article.model';
-import { Select, Selector, Store } from '@ngxs/store';
-import { ArticleState } from 'src/app/store/article.state';
+import { Select, Store } from '@ngxs/store';
 import { Comment } from 'src/app/models/comment.model';
 import * as _ from 'lodash';
-import { ArticleActions } from 'src/app/store/article.actions';
-import { SettingsState } from 'src/app/store/settings/settings.state';
-import { UserState } from 'src/app/store/user/user.state';
-import { User } from 'src/app/models/user.model';
+import { UserSelectors } from 'src/app/store/user/user.selectors';
+import { SettngSelectors } from 'src/app/store/settings/settings.selector';
+import { ArticleActions } from 'src/app/store/article/article.actions';
+import { ArticleSelectors } from 'src/app/store/article/article.selectors';
 
 
 @Component({
@@ -25,7 +24,7 @@ import { User } from 'src/app/models/user.model';
   ],
 })
 export class ArticleDetailsComponent implements OnInit, OnDestroy {
-  @Select(SettingsState.xsDevice) xsDevice$: Observable<boolean>;
+  @Select(SettngSelectors.xsDevice) xsDevice$: Observable<boolean>;
   columnsData = [
     { columnName: 'author', fieldName: 'author' },
     { columnName: 'comment', fieldName: 'shortText' },
@@ -47,12 +46,12 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.ratingValues.set('DISLIKE', false);
     this.columnsNames = this.columnsData.map(column => column.columnName);
     this.subscription.add(
-      this.store.select(ArticleState.article).subscribe(
+      this.store.select(ArticleSelectors.article).subscribe(
         article => this.handleArticleSubscribe(article)
       )
     );
     this.subscription.add(
-      this.store.select(UserState.logged).subscribe(logged => this.logged = logged)
+      this.store.select(UserSelectors.logged).subscribe(logged => this.logged = logged)
     )
   }
 

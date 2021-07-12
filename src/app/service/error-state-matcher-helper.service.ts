@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { SystemStateMatcher } from '../matcher/system-error-state.matcher';
+import { ErrorSelectors } from '../store/error/error.selector';
 import { ErrorState } from '../store/error/error.state';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class ErrorStateMatcherHelperService implements OnDestroy {
 
   constructor(private store: Store) {
     this.matchers = new Map<string, SystemStateMatcher>();
-    this.subscription = store.select(ErrorState.errors).subscribe(
+    this.subscription = store.select(ErrorSelectors.errors).subscribe(
       errors => this.handleErrorsSubscribe(errors)
     )
   }

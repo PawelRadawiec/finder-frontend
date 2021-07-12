@@ -15,7 +15,6 @@ import { ArticleListComponent } from './components/article-list/article-list.com
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { ArticleState } from './store/article.state';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ArticleFormComponent } from './components/article-form/article-form.component';
@@ -48,7 +47,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NotificationComponent } from './components/notification/notification.component';
 import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
 import { myRxStompConfig } from './my-rx-stomp.config';
-import {MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { ArticleState } from './store/article/article.state';
 
 const materialModules = [
   MatIconModule,
@@ -112,7 +112,7 @@ const ngxsModules = [
     CommonModule
   ],
   providers: [
-    errorInterceptorProviders, 
+    errorInterceptorProviders,
     authInterceptorProviders,
     {
       provide: InjectableRxStompConfig,

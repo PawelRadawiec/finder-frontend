@@ -6,6 +6,7 @@ import { RegistrationResponseModel } from 'src/app/models/registration-response.
 import { User } from 'src/app/models/user.model';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
 import { UserActions } from 'src/app/store/user/user.actions';
+import { UserSelectors } from 'src/app/store/user/user.selectors';
 import { UserState } from 'src/app/store/user/user.state';
 
 @Component({
@@ -15,7 +16,7 @@ import { UserState } from 'src/app/store/user/user.state';
   providers: [ErrorStateMatcherHelperService]
 })
 export class RegistrationFormComponent implements OnInit, OnDestroy {
-  @Select(UserState.registerLoading) registerLoading$: Observable<boolean>;
+  @Select(UserSelectors.registerLoading) registerLoading$: Observable<boolean>;
   registrationResponseModel: RegistrationResponseModel;
   registrationForm: FormGroup;
   private subscription = new Subscription();
@@ -29,7 +30,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setForm();
     this.subscription.add(
-      this.store.select(UserState.registrationResponseModel).subscribe(registrationResponseModel => this.registrationResponseModel = registrationResponseModel)
+      this.store.select(UserSelectors.registrationResponseModel).subscribe(registrationResponseModel => this.registrationResponseModel = registrationResponseModel)
     );
   }
 

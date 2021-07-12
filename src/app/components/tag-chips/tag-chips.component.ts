@@ -8,6 +8,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ErrorStateMatcherHelperService } from 'src/app/service/error-state-matcher-helper.service';
 import { Store } from '@ngxs/store';
 import { ErrorState } from 'src/app/store/error/error.state';
+import { ErrorSelectors } from 'src/app/store/error/error.selector';
 
 @Component({
   selector: 'app-tag-chips',
@@ -40,7 +41,7 @@ export class TagChipsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.store.select(ErrorState.errors).subscribe(
+    this.subscription = this.store.select(ErrorSelectors.errors).subscribe(
       () => this.hasError()
     )
     this.form.addControl('tags', this.formBuilder.array([

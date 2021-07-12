@@ -1,4 +1,3 @@
-import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { catchError, mergeMap } from "rxjs/operators";
@@ -7,15 +6,8 @@ import { RegistrationResponseModel } from "src/app/models/registration-response.
 import { User } from "src/app/models/user.model";
 import { TokenStorageService } from "src/app/service/token-storage.service";
 import { UserService } from "src/app/service/user.service";
+import { UserSateModel } from "./user-state.model";
 import { UserActions } from "./user.actions";
-
-export interface UserSateModel {
-    activateMessage: MessageResponse;
-    user: User,
-    logged: boolean;
-    registerLoading: boolean;
-    registrationResponseModel: RegistrationResponseModel;
-}
 
 @State<UserSateModel>({
     name: 'user',
@@ -27,7 +19,6 @@ export interface UserSateModel {
         registrationResponseModel: null
     }
 })
-@Injectable()
 export class UserState {
 
     constructor(
@@ -38,25 +29,6 @@ export class UserState {
 
     }
 
-    @Selector()
-    static activateMessage(state: UserSateModel) {
-        return state.activateMessage;
-    }
-
-    @Selector()
-    static logged(state: UserSateModel) {
-        return state.logged;
-    }
-
-    @Selector()
-    static registrationResponseModel(state: UserSateModel) {
-        return state.registrationResponseModel;
-    }
-
-    @Selector()
-    static registerLoading(state: UserSateModel) {
-        return state.registerLoading;
-    }
 
     @Action(UserActions.RegistrationRequest)
     registrationRequest(state: StateContext<UserSateModel>, action: UserActions.RegistrationRequest) {

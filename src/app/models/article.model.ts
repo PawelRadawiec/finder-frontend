@@ -1,4 +1,3 @@
-import { ArticleState } from "../store/article.state";
 import { Comment } from "./comment.model";
 
 export enum ArticleStatus {

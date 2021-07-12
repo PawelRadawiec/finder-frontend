@@ -4,7 +4,7 @@ import { Store } from "@ngxs/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { UserService } from "../service/user.service";
-import { ArticleState } from "../store/article.state";
+import { ArticleState } from "../store/article/article.state";
 import { UserActions } from "../store/user/user.actions";
 
 @Injectable()
