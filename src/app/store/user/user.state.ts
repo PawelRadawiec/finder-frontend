@@ -1,3 +1,4 @@
+import { Injectable } from "@angular/core";
 import { Navigate } from "@ngxs/router-plugin";
 import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { catchError, mergeMap } from "rxjs/operators";
@@ -19,6 +20,7 @@ import { UserActions } from "./user.actions";
         registrationResponseModel: null
     }
 })
+@Injectable()
 export class UserState {
 
     constructor(
