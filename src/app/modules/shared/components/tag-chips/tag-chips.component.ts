@@ -44,6 +44,7 @@ export class TagChipsComponent implements OnInit {
     this.subscription = this.store.select(ErrorSelectors.errors).subscribe(
       () => this.hasError()
     )
+    this.form = this.formBuilder.group({});
     this.form.addControl('tags', this.formBuilder.array([
       this.tagCtrl
     ]));

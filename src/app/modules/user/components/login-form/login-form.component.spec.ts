@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { UserState } from 'src/app/store/user/user.state';
 
 import { LoginFormComponent } from './login-form.component';
 
@@ -8,7 +12,12 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ]
+      declarations: [ LoginFormComponent ],
+      imports: [
+        NgxsModule.forRoot([UserState]),
+        HttpClientModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   });

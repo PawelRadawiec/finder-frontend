@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
+import { ArticleState } from 'src/app/store/article/article.state';
 
 import { ArticleDetailsComponent } from './article-details.component';
 
@@ -8,7 +11,11 @@ describe('ArticleDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ArticleDetailsComponent ]
+      declarations: [ ArticleDetailsComponent ],
+      imports: [
+        NgxsModule.forRoot([ArticleState]),
+        HttpClientModule
+      ]
     })
     .compileComponents();
   });

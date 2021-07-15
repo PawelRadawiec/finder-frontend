@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { TokenStorageService } from './token-storage.service';
@@ -6,7 +7,11 @@ describe('TokenStorageService', () => {
   let service: TokenStorageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ]
+    });
     service = TestBed.inject(TokenStorageService);
   });
 

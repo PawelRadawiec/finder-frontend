@@ -1,4 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgxsModule } from '@ngxs/store';
+import { ArticleState } from 'src/app/store/article/article.state';
 
 import { TagChipsComponent } from './tag-chips.component';
 
@@ -8,7 +13,13 @@ describe('TagChipsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TagChipsComponent ]
+      declarations: [ TagChipsComponent ],
+      imports: [
+        NgxsModule.forRoot([ArticleState]),
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatAutocompleteModule
+      ]
     })
     .compileComponents();
   });
